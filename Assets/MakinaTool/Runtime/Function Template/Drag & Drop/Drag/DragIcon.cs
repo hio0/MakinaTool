@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Drag될 때 마우스를 따라가는 객체가 상속받는 클래스입니다.
+/// Drag될 때 마우스를 따라가는 객체가 지니는 재너릭 컴포넌트. 단독 사용이 불가능합니다.
 /// </summary>
 /// <typeparam name="T">재너릭엔 받고자하는 데이터의 형식이 들어갑니다.</typeparam>
 public abstract class DragIcon<T> : MonoBehaviour

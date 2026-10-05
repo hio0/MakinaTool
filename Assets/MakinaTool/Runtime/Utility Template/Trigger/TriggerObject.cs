@@ -5,11 +5,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 /// <summary>
-/// EventTrigger를 사용하는 오브젝트들이 상속하는 클래스입니다.
+/// EventTrigger를 사용하는 객체가 지니는 컴포넌트.
+/// 변수명: trigger
 /// </summary>
-public abstract class TriggerObject : MonoBehaviour
+public class TriggerObject : MonoBehaviour
 {
-    [Header("트리거")]
     [SerializeField] protected EventTrigger trigger;
 
     /// <summary>
@@ -17,7 +17,7 @@ public abstract class TriggerObject : MonoBehaviour
     /// </summary>
     /// <param name="type">어떤 조건일 때 실행시킬건가요?</param>
     /// <param name="act">어떤걸 실행시킬건가요? ( 매개변수 없는 함수 필요 )</param>
-    protected virtual void AddTrigger(EventTriggerType type, Action act)
+    public virtual void AddTrigger(EventTriggerType type, Action act)
     {
         EventTrigger.Entry entry = new EventTrigger.Entry
         {
@@ -28,7 +28,7 @@ public abstract class TriggerObject : MonoBehaviour
         trigger.triggers.Add(entry);
     }
 
-    protected virtual void AddPointerEventTrigger(EventTriggerType type, Action<PointerEventData> act)
+    public virtual void AddPointerEventTrigger(EventTriggerType type, Action<PointerEventData> act)
     {
         EventTrigger.Entry entry = new EventTrigger.Entry
         {
@@ -46,7 +46,7 @@ public abstract class TriggerObject : MonoBehaviour
     /// EventTrigger에 특정 listner 제거
     /// </summary>
     /// <param name="type">어떤 조건일 때 실행시킬건가요?</param>
-    protected virtual void RemoveTrigger(EventTriggerType type)
+    public virtual void RemoveTrigger(EventTriggerType type)
     {
         trigger.triggers.RemoveAll(entry => entry.eventID == type);
     }
@@ -54,7 +54,7 @@ public abstract class TriggerObject : MonoBehaviour
     /// <summary>
     /// EventTrigger 리셋
     /// </summary>
-    protected virtual void ResetTrigger()
+    public virtual void ResetTrigger()
     {
         trigger.triggers.Clear();
     }
