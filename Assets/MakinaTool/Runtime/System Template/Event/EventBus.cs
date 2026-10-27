@@ -1,37 +1,35 @@
 using System;
 using System.Collections.Generic;
 
-/// <summary>
-/// 이벤트들을 보관하고 
-/// </summary>
 public class EventBus
 {
-    public Dictionary<Type, Action<IEvent>> eventList { get; private set; } = new();
+    public Dictionary<string, Delegate> eventList { get; private set; } = new();
 
-    public virtual void Subscribe<T>(Action<T> handler) where T : IEvent
+    public virtual void Subscribe<T>(string id, Action<T> handler) where T : IEvent
     {
-        Type type = typeof(T);
-        Action<IEvent> wrapper = (e) => handler((T)e);
-
-        if (!eventList.ContainsKey(type))
+        if (eventList.TryGetValue(id, out var existing))
         {
-            eventList[type] = delegate { };
+            eventList[id] = Delegate.Combine(existing, handler);
         }
-
-        eventList[type] += wrapper;
-    }
-
-    public virtual void Unsubscribe<T>(Action<T> handler) where T : IEvent
-    {
-        
-    }
-
-    public virtual void Publish<T>(T eventData) where T : IEvent
-    {
-        Type type = typeof(T);
-        if (eventList.TryGetValue(type, out var handler))
+        else
         {
-            handler.Invoke(eventData);
+            eventList[id] = handler;
+        }
+    }
+
+    public void Unsubscribe<T>(string id, Action<T> handler)
+    {
+        if (!eventList.TryGetValue(id, out var existing))
+            return;
+
+        eventList[id] = Delegate.Remove(existing, handler);
+    }
+
+    public void Publish<T>(string id, T data)
+    {
+        if (eventList.TryGetValue(id, out var handler))
+        {
+            ((Action<T>)handler).Invoke(data);
         }
     }
 }

@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ValueBojung
+public class DeriveValue
 {
     public float baseValue { get; private set; }
     public List<ValueModifier> modifierList { get; private set; } = new();
 
-    public ValueBojung(float value)
+    public DeriveValue(float value)
     {
         baseValue = value;
     }
