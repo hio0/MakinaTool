@@ -1,35 +1,61 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
+using UnityEngine;
 
-public class EventBus
+public static class EventBus
 {
-    public Dictionary<string, Delegate> eventList { get; private set; } = new();
+    private static readonly Dictionary<Type, Delegate> events = new();
 
-    public virtual void Subscribe<T>(string id, Action<T> handler) where T : IEvent
+    public static void Subscribe<T>(Action<T> callback)
+        where T : Event
     {
-        if (eventList.TryGetValue(id, out var existing))
+        Type type = typeof(T);
+
+        if (events.TryGetValue(type, out Delegate existing))
         {
-            eventList[id] = Delegate.Combine(existing, handler);
+            events[type] = Delegate.Combine(existing, callback);
         }
         else
         {
-            eventList[id] = handler;
+            events[type] = callback;
         }
     }
 
-    public void Unsubscribe<T>(string id, Action<T> handler)
+    public static void Unsubscribe<T>(Action<T> callback)
+        where T : Event
     {
-        if (!eventList.TryGetValue(id, out var existing))
-            return;
+        Type type = typeof(T);
 
-        eventList[id] = Delegate.Remove(existing, handler);
-    }
-
-    public void Publish<T>(string id, T data)
-    {
-        if (eventList.TryGetValue(id, out var handler))
+        if (!events.TryGetValue(type, out Delegate existing))
         {
-            ((Action<T>)handler).Invoke(data);
+            return;
         }
+
+        Delegate result = Delegate.Remove(existing, callback);
+
+        if (result == null)
+        {
+            events.Remove(type);
+        }
+        else
+        {
+            events[type] = result;
+        }
+    }
+
+    public static void Publish<T>(T eventData)
+        where T : Event
+    {
+        if (events.TryGetValue(typeof(T), out Delegate callback))
+        {
+            ((Action<T>)callback)?.Invoke(eventData);
+        }
+    }
+
+    public static void ClearAllEvent()
+    {
+        events.Clear();
     }
 }

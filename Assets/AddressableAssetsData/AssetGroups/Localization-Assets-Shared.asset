@@ -17,6 +17,18 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 623733ad52372b64fa632add4a91121e
   m_SerializeEntries:
+  - m_GUID: 4f5f563cb4961554a8085f97d15122a4
+    m_Address: Assets/MakinaTool/Samples/Example/Assets/Input/Sample_Input Shared
+      Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 97b33eadf788c8c499b20c3bd808f0c1
+    m_Address: Assets/MakinaTool/Samples/Example/Assets/Dialogue/Sample_Dialogue
+      Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c0de989afc542964b935c9b8d5097301
     m_Address: Assets/MakinaTool/Samples/Example/Assets/Translation/Sample_GameText
       Shared Data.asset

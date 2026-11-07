@@ -9,5 +9,6 @@
     }
     "dependencies": {
         "com.unity.localization": "1.5.13"
+        "com.unity.inputsystem": "1.14.2"
     }
 }

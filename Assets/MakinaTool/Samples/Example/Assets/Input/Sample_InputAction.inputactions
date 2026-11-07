@@ -1,0 +1,55 @@
+{
+    "version": 1,
+    "name": "Sample_InputAction",
+    "maps": [
+        {
+            "name": "SampleInput",
+            "id": "81e36fd4-5b65-4770-989a-8c95c6d1cc6b",
+            "actions": [
+                {
+                    "name": "SetWhite",
+                    "type": "Button",
+                    "id": "f33c1bbb-10ec-46ed-a3a8-b66ac8bd7bf1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SetNormal",
+                    "type": "Button",
+                    "id": "ef2a114d-2d6e-45a0-a3db-8a5387ad3e74",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "271e3081-603e-4163-9de3-1acfb2269884",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SetWhite",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "50057f9d-613e-4d74-ac02-5bab39c0e805",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SetNormal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -17,8 +17,20 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 9c62e47154f5b2749990d18960ccc6f7
   m_SerializeEntries:
+  - m_GUID: 2ee7e35dda91f9f47abea92c10779d29
+    m_Address: Sample_Input_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6161e9b71b89ece4c887d995d4410ff9
+    m_Address: Sample_Dialogue_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7ead79cf53921e14995e456a31863889
-    m_Address: Sample_GameText_en
+    m_Address: Sample_Translation_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

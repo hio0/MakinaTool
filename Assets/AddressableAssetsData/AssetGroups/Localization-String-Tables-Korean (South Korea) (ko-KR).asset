@@ -18,7 +18,19 @@ MonoBehaviour:
   m_GUID: 3f185ecce576b6442b2ae6746610ad98
   m_SerializeEntries:
   - m_GUID: 43c7e140ffd6bcd4d8dacbb277ab55c2
-    m_Address: Sample_GameText_ko-KR
+    m_Address: Sample_Translation_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8ef5951accd1ab645adf669648a3fae3
+    m_Address: Sample_Dialogue_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a581016dcb25809458c4d9f918216df7
+    m_Address: Sample_Input_ko-KR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko-KR
