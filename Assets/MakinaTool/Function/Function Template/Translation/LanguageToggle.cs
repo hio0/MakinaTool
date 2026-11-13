@@ -4,29 +4,34 @@ using UnityEngine;
 using UnityEngine.Localization;
 
 [RequireComponent(typeof(ToggleObject))]
-[RequireComponent(typeof(LeanguageSetter))]
-public class LeanguageToggle : MonoBehaviour
+[RequireComponent(typeof(LanguageSetter))]
+public class LanguageToggle : ModuleClass
 {
     [Header("기능 클래스")]
     [SerializeField] ToggleObject toggle;
-    [SerializeField] LeanguageSetter leanguageSet;
+    [SerializeField] LanguageSetter leanguageSetter;
 
-    [SerializeField] string myLocale;
+    [SerializeField] protected string myLocale;
 
-    protected virtual void OnEnable()
+    public virtual void Initialize(string locale)
+    {
+        myLocale = locale;
+    }
+
+    public override void Activate()
     {
         CompareLocale();
         toggle.AddListner(ChangeLocale);
     }
 
-    protected virtual void OnDisable()
+    public override void Deactivate()
     {
         toggle.RemoveListner(ChangeLocale);
     }
 
     protected virtual void CompareLocale()
     {
-        string nowLocale = leanguageSet.GetNowLocale();
+        string nowLocale = leanguageSetter.GetNowLocale();
         bool isOn = false;
 
         if(myLocale == nowLocale)
@@ -41,7 +46,7 @@ public class LeanguageToggle : MonoBehaviour
     {
         if(isOn)
         {
-            leanguageSet.SetLeanguage(myLocale);
+            leanguageSetter.SetLeanguage(myLocale);
         }
     }
 }

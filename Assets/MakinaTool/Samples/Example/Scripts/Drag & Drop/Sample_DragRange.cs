@@ -11,11 +11,15 @@ public class Sample_DragRange : IdentitiyClass
     private void OnEnable()
     {
         dragRange.OnBeginDrag += BeginDrag;
+
+        dragRange.Activate();
     }
 
     private void OnDisable()
     {
         dragRange.OnBeginDrag -= BeginDrag;
+
+        dragRange.Deactivate();
     }
 
     void BeginDrag()

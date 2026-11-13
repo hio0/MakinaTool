@@ -21,6 +21,8 @@ public class Sample_DragIcon : IdentitiyClass
     void OnDisable()
     {
         dragIcon.OnInitialize -= IconChange;
+
+        dragIcon.Deactivate();
     }
 
     void IconChange()

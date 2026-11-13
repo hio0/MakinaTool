@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Toggle))]
-public class ToggleObject : MonoBehaviour
+public class ToggleObject : AbilityClass
 {
     [SerializeField] Toggle toggle;
 

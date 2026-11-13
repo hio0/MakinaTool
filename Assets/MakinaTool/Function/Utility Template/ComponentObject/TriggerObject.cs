@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(EventTrigger))]
-public class TriggerObject : MonoBehaviour
+public class TriggerObject : AbilityClass
 {
     [SerializeField] EventTrigger trigger;
 

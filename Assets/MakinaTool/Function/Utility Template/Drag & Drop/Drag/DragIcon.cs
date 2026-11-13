@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DragIcon : MonoBehaviour
+public class DragIcon : AbilityClass
 {
     public object dragData { get; protected set; }
 
@@ -21,7 +21,7 @@ public class DragIcon : MonoBehaviour
         OnInitialize?.Invoke();
     }
 
-    protected virtual void OnDisable()
+    public override void Deactivate()
     {
         StopAllCoroutines();
     }

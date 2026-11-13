@@ -11,9 +11,9 @@ public class DragRange_Icon : DragRange_Data
 
     protected DragIcon nowIcon;
 
-    protected override void Awake()
+    public override void Activate()
     {
-        base.Awake();
+        base.Activate();
 
         iconSpawner = new ObjectSpawner<DragIcon>(pre_dragIcon, iconPos, 5);
         iconSpawner.DefaultSet();

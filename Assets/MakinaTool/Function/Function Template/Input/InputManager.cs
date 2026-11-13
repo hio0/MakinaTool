@@ -6,9 +6,15 @@ using UnityEngine.InputSystem;
 
 public class InputManager : Manager<InputManager>
 {
-    [SerializeField] InputActionAsset inputActions;
+    public InputActionAsset inputActions { get; private set; }
+    public InputDatabase inputDatabase { get; private set; }
 
     InputActionRebindingExtensions.RebindingOperation rebindOperation;
+
+    public event Action<InputAction, int> OnRebindStart;
+    public event Action<InputAction, InputAction, int> OnReBindingComplete;
+    public event Action<InputAction, int> OnRebindComplete;
+    public event Action OnRebindCanceled;
 
     protected override void Awake()
     {
@@ -73,14 +79,12 @@ public class InputManager : Manager<InputManager>
     }
 
     // Binding
-    public void StartRebind(InputActionReference action, int bindingIndex, Action onStart, Action onCancel = null)
+    public void StartRebind(InputAction target, int bindingIndex)
     {
         if (rebindOperation != null)
         {
             return;
         }
-
-        InputAction target = action.action;
 
         if (bindingIndex < 0 || bindingIndex >= target.bindings.Count)
         {
@@ -93,23 +97,62 @@ public class InputManager : Manager<InputManager>
         }
 
         rebindOperation = target.PerformInteractiveRebinding(bindingIndex)
+            .OnPotentialMatch(operation =>
+            {
+                string newPath = operation.selectedControl.path;
+
+                if (TryFindDuplicateBinding(newPath, target, bindingIndex, out InputAction duplicateAction, out int duplicateIndex))
+                {
+                    InputAction oldInput = duplicateAction;
+                    InputAction newInput = target;
+
+                    duplicateAction.ApplyBindingOverride(duplicateIndex, "");
+
+                    OnReBindingComplete?.Invoke(oldInput, newInput, bindingIndex);
+                }
+            })
             .OnComplete(operation =>
             {
                 operation.Dispose();
                 rebindOperation = null;
 
-                EventBus.Publish<Event_RebindComplete>(new Event_RebindComplete(target.GetBindingDisplayString(bindingIndex)));
+                OnRebindComplete?.Invoke(target, bindingIndex);
             })
             .OnCancel(operation =>
             {
                 operation.Dispose();
                 rebindOperation = null;
 
-                onCancel?.Invoke();
+                OnRebindCanceled?.Invoke();
             });
 
         rebindOperation.Start();
-        onStart?.Invoke();
+        OnRebindStart?.Invoke(target, bindingIndex);
+
+        bool TryFindDuplicateBinding(string path, InputAction target, int bindingIndex, out InputAction duplicateAction, out int duplicateIndex)
+        {
+            foreach (InputAction action in inputActions)
+            {
+                for (int i = 0; i < action.bindings.Count; i++)
+                {
+                    if (action == target && i == bindingIndex)
+                    {
+                        continue;
+                    }
+
+                    if (action.bindings[i].effectivePath == path)
+                    {
+                        duplicateAction = action;
+                        duplicateIndex = i;
+                        return true;
+                    }
+                }
+            }
+
+            duplicateAction = null;
+            duplicateIndex = -1;
+            return false;
+        }
     }
 
     public void CancelRebind()
@@ -132,6 +175,11 @@ public class InputManager : Manager<InputManager>
     public void ResetAllBindings(InputActionReference action)
     {
         action.action.RemoveAllBindingOverrides();
+    }
+
+    public void ResetAll()
+    {
+        inputActions.RemoveAllBindingOverrides();
     }
 
     public string GetBindingDisplay(InputActionReference action, int bindingIndex)

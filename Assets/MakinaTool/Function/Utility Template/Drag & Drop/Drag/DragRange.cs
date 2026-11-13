@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(TriggerObject))]
-public class DragRange : MonoBehaviour
+public class DragRange : ModuleClass
 {
     [SerializeField] TriggerObject trigger;
 
@@ -14,14 +14,14 @@ public class DragRange : MonoBehaviour
     public event Action OnDrag;
     public event Action OnEndDrag;
 
-    protected virtual void Awake()
+    public override void Activate()
     {
         trigger.AddTrigger(EventTriggerType.BeginDrag, BeginDrag);
         trigger.AddTrigger(EventTriggerType.Drag, Drag);
         trigger.AddTrigger(EventTriggerType.EndDrag, EndDrag);
     }
 
-    protected virtual void OnDisable()
+    public override void Deactivate()
     {
         OnBeginDrag = null;
         OnDrag = null;

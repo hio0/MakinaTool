@@ -3,16 +3,16 @@ using UnityEngine;
 using UnityEngine.Localization;
 using UnityEngine.Localization.Settings;
 
-public class LeanguageTrigger : MonoBehaviour
+public class LanguageTrigger : AbilityClass
 {
     public event Action<Locale> OnChangedLeanguage;
 
-    protected virtual void OnEnable()
+    public override void Activate()
     {
         LocalizationSettings.SelectedLocaleChanged += ChangedLeanguage;
     }
 
-    protected virtual void OnDisable()
+    public override void Deactivate()
     {
         LocalizationSettings.SelectedLocaleChanged -= ChangedLeanguage;
     }

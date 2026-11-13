@@ -5,13 +5,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(TriggerObject))]
-public class DropRange : MonoBehaviour
+public class DropRange : ModuleClass
 {
     [SerializeField] TriggerObject trigger;
 
     public event Action OnDrop;
 
-    protected virtual void Awake()
+    public override void Activate()
     {
         trigger.AddPointerEventTrigger(EventTriggerType.Drop, Drop);
     }

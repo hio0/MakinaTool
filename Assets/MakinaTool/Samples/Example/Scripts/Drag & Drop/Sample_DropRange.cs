@@ -12,6 +12,8 @@ public class Sample_DropRange : IdentitiyClass
     void OnEnable()
     {
         dropRange.OnDrop += Drop;
+
+        dropRange.Activate();
     }
 
     void OnDisable()

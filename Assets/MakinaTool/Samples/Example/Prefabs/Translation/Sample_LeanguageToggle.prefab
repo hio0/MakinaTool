@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 959952072876092066}
   - component: {fileID: 2107708300098866507}
+  - component: {fileID: 7505719863216524282}
   - component: {fileID: 2729690178046307044}
   - component: {fileID: 2495656711340948822}
   - component: {fileID: 6590915013824095816}
@@ -89,6 +90,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!114 &7505719863216524282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3478334176223421057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 648020efb2de34d4e869225516ce74da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetModule: {fileID: 2729690178046307044}
 --- !u!114 &2729690178046307044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toggle: {fileID: 2495656711340948822}
-  leanguageSet: {fileID: 6590915013824095816}
+  leanguageSetter: {fileID: 6590915013824095816}
   myLocale: 
 --- !u!114 &2495656711340948822
 MonoBehaviour:
